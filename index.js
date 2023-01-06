@@ -24,6 +24,7 @@ consoleStamp(console, { format: ':date(HH:MM:ss)' });
                         await withdraw(coin, process.env.NETWORK, wallets[i], process.env.AMOUNT).then(function(id) {
                             console.log(chalk.blue(`Send, Id: ${id}`));
                         });
+                        await timeout(500);
                     }
                 }
             }

@@ -7,9 +7,15 @@ dotenv.config();
 
 consoleStamp(console, { format: ':date(HH:MM:ss)' });
 
+const generateRandomAmount = (min, max, num) => {
+    const amount = Number(Math.random() * (max - min) + min);
+    return Number(parseFloat(amount).toFixed(num));
+}
+
 (async() => {
     const wallets = parseFile('address.txt');
     const coin = process.env.COIN;
+    const amount = generateRandomAmount(Number(process.env.AMOUNT_MIN), Number(process.env.AMOUNT_MAX), 3);
     if (wallets.length <= 1) {
         console.log(chalk.red('Add address in file'));
     } else {
@@ -21,7 +27,7 @@ consoleStamp(console, { format: ':date(HH:MM:ss)' });
                     if (wallets[i].length > 42) {
                         console.log(chalk.red(`Incorrect address in ${i+1} line`))
                     } else {
-                        await withdraw(coin, process.env.NETWORK, wallets[i], process.env.AMOUNT).then(function(id) {
+                        await withdraw(coin, process.env.NETWORK, wallets[i], amount).then(function(id) {
                             console.log(chalk.blue(`Send, Id: ${id}`));
                         });
                         await timeout(500);
@@ -30,4 +36,4 @@ consoleStamp(console, { format: ':date(HH:MM:ss)' });
             }
         });
     }
-})();
+});

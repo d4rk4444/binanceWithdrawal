@@ -15,7 +15,6 @@ const generateRandomAmount = (min, max, num) => {
 (async() => {
     const wallets = parseFile('address.txt');
     const coin = process.env.COIN;
-    const amount = generateRandomAmount(Number(process.env.AMOUNT_MIN), Number(process.env.AMOUNT_MAX), 3);
     if (wallets.length <= 1) {
         console.log(chalk.red('Add address in file'));
     } else {
@@ -27,8 +26,9 @@ const generateRandomAmount = (min, max, num) => {
                     if (wallets[i].length > 42) {
                         console.log(chalk.red(`Incorrect address in ${i+1} line`))
                     } else {
+                        const amount = generateRandomAmount(Number(process.env.AMOUNT_MIN), Number(process.env.AMOUNT_MAX), 4);
                         await withdraw(coin, process.env.NETWORK, wallets[i], amount).then(function(id) {
-                            console.log(chalk.blue(`Send, Id: ${id}`));
+                            console.log(chalk.blue(`Send: ${amount}  toAddress: ${wallets[i]}  Id: ${id}`));
                         });
                         await timeout(500);
                     }
@@ -36,4 +36,4 @@ const generateRandomAmount = (min, max, num) => {
             }
         });
     }
-});
+})();

@@ -14,10 +14,6 @@ Script for auto withdrawal from Binance.
 2) Open terminal
 3) Download Tools/Main Script folder and install modules
 ```bash
-git clone https://github.com/d4rk4444/Tools.git &&\
-cd Tools &&\
-npm i &&\
-cd .. &&\
 git clone https://github.com/d4rk4444/binanceWithdrawal.git &&\
 cd binanceWithdrawal &&\
 npm i

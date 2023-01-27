@@ -1,6 +1,6 @@
 {
   "name": "binance-withdrawal",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -11,6 +11,7 @@
   "dependencies": {
     "chalk": "^5.2.0",
     "console-stamp": "^3.1.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "tools-d4rk444": "^1.1.3"
   }
 }

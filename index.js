@@ -10,7 +10,7 @@ consoleStamp(console, { format: ':date(HH:MM:ss)' });
 (async() => {
     const wallets = parseFile('address.txt');
     const coin = process.env.COIN;
-    const pauseTime = generateRandomAmount(4500, 7800, 0);
+    const pauseTime = generateRandomAmount(process.env.PAUSE_SEC_MIN * 1000, process.env.PAUSE_SEC_MAX * 1000, 0);
     const apiSecret = process.env.BINANCE_API_SECRET;
     const apiKey = process.env.BINANCE_API_KEY;
 
@@ -22,7 +22,7 @@ consoleStamp(console, { format: ':date(HH:MM:ss)' });
         for (let i = 0; i < wallets.length; i++) {
             const amount = generateRandomAmount(Number(process.env.AMOUNT_MIN), Number(process.env.AMOUNT_MAX), 5);
             await withdrawBinance(coin, process.env.NETWORK, wallets[i], amount, apiSecret, apiKey).then((id) => {
-                console.log(chalk.blue(`Send: ${amount}  toAddress: ${wallets[i]}  Id: ${id}`));
+                console.log(chalk.blue(`${i+1} Send: ${amount}  toAddress: ${wallets[i]}  Id: ${id}`));
             });
             await timeout(pauseTime);
         }
